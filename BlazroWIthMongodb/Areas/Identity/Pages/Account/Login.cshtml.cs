@@ -10,10 +10,11 @@ namespace BlazroWIthMongodb.Areas.Identity.Pages.Account;
 public class LoginModel : PageModel
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
-
-    public LoginModel(SignInManager<ApplicationUser> signInManager)
+    private readonly UserManager<ApplicationUser> _userManager;
+    public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     {
         _signInManager = signInManager;
+        _userManager = userManager;
     }
 
     [BindProperty]
@@ -33,7 +34,11 @@ public class LoginModel : PageModel
             ReturnUrl = Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, isPersistent: false, false);
+                var userToSignIn = await _userManager.FindByEmailAsync(Input.Email);
+                if (userToSignIn is null)
+                    return Page();
+
+                var result = await _signInManager.PasswordSignInAsync(userToSignIn, Input.Password, isPersistent: false, false);
                 if (result.Succeeded)
                 {
                     return LocalRedirect(ReturnUrl);

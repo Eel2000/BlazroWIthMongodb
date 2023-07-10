@@ -1,3 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
-<main> @Body </main>
+<AuthorizeView>
+    <NotAuthorized>
+        <AutoRedirect />
+    </NotAuthorized>
+    <Authorized>
+        <main>
+            <NavBar />
+
+            @Body
+        </main>
+    </Authorized>
+</AuthorizeView>
