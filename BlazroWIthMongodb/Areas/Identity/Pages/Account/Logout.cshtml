@@ -1,0 +1,15 @@
+﻿@page
+@using BlazroWIthMongodb.Models;
+@attribute [IgnoreAntiforgeryToken]
+@inject SignInManager<ApplicationUser> SignInMananger
+@functions{
+    public async Task<IActionResult> OnGet()
+    {
+        if (SignInMananger.IsSignedIn(User))
+        {
+            await SignInMananger.SignOutAsync();
+        }
+
+        return Redirect("~/");
+    }
+}
