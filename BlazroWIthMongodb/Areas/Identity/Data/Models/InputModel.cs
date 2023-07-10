@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BlazroWIthMongodb.Areas.Data.Models;
+namespace BlazroWIthMongodb.Areas.Identity.Data.Models;
 
 #nullable disable
 public class InputModel

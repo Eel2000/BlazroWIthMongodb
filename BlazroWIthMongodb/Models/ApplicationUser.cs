@@ -1,6 +1,9 @@
+using AspNetCore.Identity.MongoDbCore.Models;
+using MongoDbGenericRepository.Attributes;
+
 namespace BlazroWIthMongodb.Models;
 
-public class ApplicationUser
+[CollectionName("Users")]
+public class ApplicationUser : MongoIdentityUser<Guid>
 {
-    
 }
