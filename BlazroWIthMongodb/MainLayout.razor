@@ -1,16 +1,17 @@
 ﻿@inherits LayoutComponentBase
 
+<MudThemeProvider/>
+
 <AuthorizeView>
     <NotAuthorized>
-        <AutoRedirect />
+        <AutoRedirect/>
     </NotAuthorized>
     <Authorized>
-        <main>
-            <NavBar />
-
-            <div class="px-1 mt-2">
+        <MudLayout>
+            <NavBar/>
+            <MudMainContent Class="px-2">
                 @Body
-            </div>
-        </main>
+            </MudMainContent>
+        </MudLayout>
     </Authorized>
 </AuthorizeView>
